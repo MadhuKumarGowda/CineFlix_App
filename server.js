@@ -1,13 +1,19 @@
+/*
+Entry point of node application
+ File created on 10th Feb 2024 By Madhu Kumar K S
+*/
 const mongoose =  require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config({path: './config.env'});
 
 const app = require('./index');
 
+// Created database connection with connection string
 mongoose.connect(process.env.CONN_STR, {useNewUrlParser:true}).then((conn)=>{
     console.log("Database connected");
 }).catch((err)=>console.log("Error iccured while connecting dtabase", err));
 
+// Defining Schema using mongoose and also added basic validation for each schema type
 const movieSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -26,6 +32,7 @@ const movieSchema = new mongoose.Schema({
     }
 });
 
+// Creating model for defined schema
 const Movie = mongoose.model('Movie', movieSchema);
 const testMovie = new Movie({
     name: "Intersteller",
@@ -35,6 +42,7 @@ const testMovie = new Movie({
     ratings: 4.5
 })
 
+// save the data to mongoDB
 testMovie.save().then((doc)=>{
     console.log("data saved succesfully");
 }).catch((err)=>{console.log(err, "Error while saving data")});
