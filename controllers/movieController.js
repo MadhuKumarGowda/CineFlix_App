@@ -13,6 +13,12 @@ mongoose.connect(process.env.CONN_STR, {useNewUrlParser:true}).then((conn)=>{
     console.log("Database connected");
 }).catch((err)=>console.log("Error iccured while connecting dtabase", err));
 
+exports.getHighestRated = (req, res, next)=>{
+    req.query.limit = "5";
+    req.query.sort = '-rating';
+    next();
+}
+
 
 exports.getAllMovies = async (req,res)=>{
     try {

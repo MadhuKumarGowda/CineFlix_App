@@ -9,6 +9,9 @@ const express = require('express');
 const movieController = require('../controllers/movieController')
 const router = express.Router();
 
+// Creating alias for routing
+router.route('/highest-rated')
+.get(movieController.getHighestRated, movieController.getAllMovies)
 
 router.route('/')
 .get(movieController.getAllMovies)
