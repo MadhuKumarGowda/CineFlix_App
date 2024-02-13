@@ -12,7 +12,10 @@ const router = express.Router();
 
 router.route('/')
 .get(movieController.getAllMovies)
-.post(movieController.crateMovie);
+.post(movieController.crateMovie)
+
+router.route("/:id")
+.get(movieController.getMovie)
 
 
 module.exports = router;

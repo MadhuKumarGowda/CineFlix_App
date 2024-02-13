@@ -24,7 +24,26 @@ exports.getAllMovies = async (req,res)=>{
             movies
         }
        })      
-    } catch (error) {
+    } catch (err) {
+        res.status(404).json({
+            status:"Failure",
+            message: err.message
+        })
+        console.log(err);
+    }
+}
+
+exports.getMovie = async (req,res)=>{
+    try {
+      // const movie = await Movie.find({_id: req.params.id}); 
+      const movie = await Movie.findById(req.params.id);
+       res.status(200).json({
+        status: "Success",        
+        data:{
+            movie
+        }
+       })    
+    } catch (err) {
         res.status(404).json({
             status:"Failure",
             message: err.message
