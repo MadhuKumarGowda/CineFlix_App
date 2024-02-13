@@ -5,18 +5,26 @@ const movieSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, "Name is require field"],
-        unique: true
+        unique: true,
+        trim:true
     },
-    description: String,
+    description:{
+        type : String,
+        required: [true, "Description is require field"],       
+        trim:true,
+    },
     duration: {
         type: Number,
         required: [true, 'Duration is require feild']
     },
-    releaseYear: Number,
+    releaseYear: {
+        type: Number,
+        required : [true, "Release year is require"]
+    },
     ratings: {
         type: Number,
         default: 1.0
-    }
+    },
 });
 
 // Creating model for defined schema
