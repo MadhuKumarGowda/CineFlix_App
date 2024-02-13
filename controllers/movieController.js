@@ -6,7 +6,7 @@ Created on 11th Feb 2024 by Madhu Kumar K S
 const mongoose =  require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config({path: './config.env'});
-const Movie =  require('./Models/moviesModels')
+const Movie =  require('../Models/moviesModels');
 
 // Created database connection with connection string
 mongoose.connect(process.env.CONN_STR, {useNewUrlParser:true}).then((conn)=>{
