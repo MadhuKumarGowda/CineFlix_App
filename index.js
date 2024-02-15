@@ -10,6 +10,9 @@ const movieRouter = require('./Routes/routes')
 const authRouter = require('./Routes/authRouter')
 const morgan = require("morgan");
 
+const CustomError = require('./Errors/customError')
+const globalErrorHandler = require('./controllers/errorController');
+
 app.use(morgan('combined'));
 
 app.use('/',movieRouter);
@@ -17,20 +20,16 @@ app.use('/users', authRouter)
 
 // Defult error handler 
 app.all('*',(req,res,next)=>{
-  res.status(404).json({
-    status: "Failure",
-    message: `Can't find ${req.originalUrl} on the server.`
-  })
+  // res.status(404).json({
+  //   status: "Failure",
+  //   message: `Can't find ${req.originalUrl} on the server.`
+  // })
+
+  const err = new CustomError(`Can't find ${req.originalUrl} on the server.`, 404);
+  next(err);
 })
 
 // Global Error handling middlewear
-app.use((error, req,res,next)=>{
-  error.statuscode = error.statuscode || 500;
-  error.status = error.status || 'error';
-  res.status(error.statuscode).json({
-    status: error.statuscode,
-    message: error.message
-  })
-})
+app.use(globalErrorHandler)
 
 module.exports = app;
