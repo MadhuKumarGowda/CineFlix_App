@@ -15,4 +15,12 @@ app.use(morgan('combined'));
 app.use('/',movieRouter);
 app.use('/users', authRouter)
 
+// Defult error handler 
+app.all('*',(req,res,next)=>{
+  res.status(404).json({
+    status: "Failure",
+    message: `Can't find ${req.originalUrl} on the server.`
+  })
+})
+
 module.exports = app;

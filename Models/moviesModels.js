@@ -1,3 +1,9 @@
+/*
+used to create schema for mongo db colelctions
+and also implement built in validation of the schema
+File created on 15th Feb 2024 By Madhu Kumar K S
+*/
+
 const mongoose = require('mongoose');
 const validator = require('validator');
 
