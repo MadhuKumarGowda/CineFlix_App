@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const validator = require('validator');
 
 // Defining Schema using mongoose and also added basic validation for each schema type
 const movieSchema = new mongoose.Schema({
@@ -8,7 +9,8 @@ const movieSchema = new mongoose.Schema({
         unique: true,
         maxlength : [100, "Movie name should not be more than 100 characters"],
         minlength: [4, "Movie name should be atleast 4 characters"],
-        trim:true
+        trim:true,
+        validate: [validator.isAlpha,"Name should contain only alphabets"]
     },
     description:{
         type : String,
@@ -17,7 +19,13 @@ const movieSchema = new mongoose.Schema({
     },
     duration: {
         type: Number,
-        required: [true, 'Duration is require feild']
+        required: [true, 'Duration is require feild'],
+        validate: {
+            validator: function(value){
+                return value >= 1 && value <= 10;
+            },
+            message: "Duration should be more than 60 and less than 180 mins"
+        }
     },
     releaseYear: {
         type: Number,
