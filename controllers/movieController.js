@@ -26,7 +26,9 @@ exports.getHighestRated = (req, res, next) => {
 exports.getAllMovies = asynErrorHandler(async (req, res, next) => {
   const movies = await Movie.find();
 
-  if (!movie) {
+  if (!movies) {
+    const error = new CustomError("Movie with given ID is not found", 404);
+    return next(error);
   }
   res.status(200).json({
     status: "Success",
@@ -40,6 +42,10 @@ exports.getAllMovies = asynErrorHandler(async (req, res, next) => {
 exports.getMovie = asynErrorHandler(async (req, res, next) => {
   // const movie = await Movie.find({_id: req.params.id});
   const movie = await Movie.findById(req.params.id);
+  if (!movie) {
+    const error = new CustomError("Movie with given ID is not found", 404);
+    return next(error);
+  }
   res.status(200).json({
     status: "Success",
     data: {
