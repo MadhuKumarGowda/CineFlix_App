@@ -1,5 +1,5 @@
 /*
-Below code demonstrate handling error of all API reqeusts
+Below code demonstrate handling error of all API reqeusts which are async methods
 Created on 01st March 2024 by Madhu Kumar K S
 */
 

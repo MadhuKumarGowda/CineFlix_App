@@ -10,7 +10,7 @@ const movieRouter = require("./Routes/routes");
 const authRouter = require("./Routes/authRouter");
 const morgan = require("morgan");
 
-const CustomError = require("./Errors/customError");
+const CustomError = require("./Utils/customError");
 const globalErrorHandler = require("./controllers/errorController");
 
 app.use(morgan("combined"));

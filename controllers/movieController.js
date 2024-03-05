@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
 const Movie = require("../Models/moviesModels");
-const CustomError = require("../Errors/customError");
+const CustomError = require("../Utils/customError");
 const asynErrorHandler = require("../Utils/asynErrorHandler");
 // Created database connection with connection string
 mongoose
@@ -25,6 +25,9 @@ exports.getHighestRated = (req, res, next) => {
 
 exports.getAllMovies = asynErrorHandler(async (req, res, next) => {
   const movies = await Movie.find();
+
+  if (!movie) {
+  }
   res.status(200).json({
     status: "Success",
     length: movies.length,
